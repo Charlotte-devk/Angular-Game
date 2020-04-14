@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dungeon RPG</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dungeoncrawler made with HTML5 and TypeScript">
+
+  <meta property="og:type" content="website">
+  <!meta property="og:image" content="PREVIEWIMAGE">
+  <meta property="og:title" content="Dungeon RPG">
+  <meta property="og:description" content="Dungeoncrawler made with HTML5 and TypeScript">
+  <meta property="og:site_name" content="Dungeon RPG">
+  <meta property="og:url" content="https://github.com/Charlotte-devk/Angular-Game/">
+
+  <meta name="twitter:card" content="summary">
+  <!meta name="twitter:image" content="https://github.com/Charlotte-devk/Angular-Game/images/preview.png">
+  <meta name="twitter:title" content="Dungeon RPG">
+  <meta name="twitter:description" content="Dungeoncrawler made with HTML5 and TypeScript">
+  <meta name="twitter:site" content="https://github.com/Charlotte-devk/Angular-Game/">
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <header>
+    <span id="monster-hp"></span>
+    <canvas id="canvas" width="300" height="300"></canvas>
+    <canvas></canvas>
+  </header>
+
+  <div class="controls">
+    <div id="row1">
+      <span id="player-hp">HP </span>
+      <span id="player-mp">MP </span>
+    </div>
+
+    <div id="row2">
+        <button id="right">&#8594;</button>
+        <button id="down">&#8595;</button>
+        <button id="up">&#8593;</button>
+        <button id="left">&#8592;</button>
+        <button id="inventory">Inventory</button>
+        <button id="defend">Defend</button>
+        <button id="attack">Attack</button>
+    </div>
+
+  </div>
+
+  <footer>
+    <div id="copyright">
+      <span id="build">&copy;2020 <a href="https://twitter.com/char_devk">@char_devk</a></span>
+    </div>
+  </footer>
+
+  <script type="module" src=".../out-tsc/app/game.js"></script>
+
+</body>
+
+</html>
