@@ -15,3 +15,12 @@ import { GameStateService } from './services/game-state.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+/**
+* @remarks
+* This class imports the following components from the following files:
+* {AppComponent app.component.ts},
+* {GameComponent game.component.ts},
+* {ButtonComponent button.component.ts},
+* and the service from the following file:
+* {GameStateService game-state.service.ts}
+*/

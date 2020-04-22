@@ -11,6 +11,16 @@ import { sleep } from '../../models/constants';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
+  /**
+ * @remarks
+ * The GameComponent defines the selector app-game used in the {@file app.component.html}.
+ * It also uses the actual running game state from {@file game-state.service.ts} to sync
+ * the count and shows the player the colors of each new round.
+ *
+ * @param count - Counts the numbers of correct guesses and shows it as a score, resets when user guesses wrong.
+ * @param colors - An object containing colornames of the type boolean to determine the actual color.
+ *
+ */
   count: number;
   colors: any = {
     red: false,
@@ -21,6 +31,11 @@ export class GameComponent implements OnInit {
 
   constructor(private game: GameStateService) {}
 
+  /**
+ * @remarks
+ * This method initialises the game upon loading the website.
+ *
+ */
   ngOnInit(){
     this.game.state.subscribe(state => {
       console.log(state);
@@ -31,16 +46,34 @@ export class GameComponent implements OnInit {
     });
     this.game.generateRound();
   }
+
+
+  /**
+ * @remarks
+ * This method sends the event from the user pressing a button as a string to the {@method game.playerGuess()}.
+ * See {@file button.component.ts}
+ *
+ * @param e - the event value of the app-game-button in the {@file game.component.html}
+ *
+ */
   playerGuess(e: string) {
     this.game.playerGuess(e);
   }
 
+  /**
+ * @remarks
+ * This method, using the Promise method in {@file constants.ts}. sets the active color to true after waiting for 200ms
+ * after waiting another 500ms it sets the active color to false again. The active colors are saved in the round array in {@file game-state.service.ts}
+ *
+ * @param round - A string array containing the colors of the going round.
+ *
+ */
   async teasePlayer(round: string[]) {
     for (let i = 0; i < round.length; i++) {
+      await sleep(200);
       this.colors[round[i]] = true;
       await sleep(500);
       this.colors[round[i]] = false;
-      await sleep(200);
     }
   }
 }
