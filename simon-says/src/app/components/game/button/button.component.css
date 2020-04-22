@@ -3,7 +3,7 @@ button {
   height: 5.6rem;
   border: 0.24rem solid;
   border-radius: 4rem;
-  background-color: var(--black);
+  background-color: var(--background1);
 }
 
 .green {

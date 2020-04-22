@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GameStateService } from '../../services/game-state.service';
-import { sleep } from '../../models/constants';
+import { START_COUNT, sleep } from '../../models/constants';
 
 
 
@@ -10,7 +10,7 @@ import { sleep } from '../../models/constants';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent{
   /**
  * @remarks
  * The GameComponent defines the selector app-game used in the {@file app.component.html}.
@@ -21,6 +21,7 @@ export class GameComponent implements OnInit {
  * @param colors - An object containing colornames of the type boolean to determine the actual color.
  *
  */
+  running: boolean = false;
   count: number;
   colors: any = {
     red: false,
@@ -33,20 +34,35 @@ export class GameComponent implements OnInit {
 
   /**
  * @remarks
- * This method initialises the game upon loading the website.
+ * This method initialises the game upon clicking the start button.
  *
  */
-  ngOnInit(){
-    this.game.state.subscribe(state => {
-      console.log(state);
-      if(this.count != state.count) {
-        this.count = state.count;
-        this.teasePlayer(state.round);
-      }
-    });
-    this.game.generateRound();
-  }
-
+ onClick(){
+   if(!this.running){
+     document.getElementById("restarter").innerHTML = "Restart"
+     this.game.state.subscribe(state => {
+       console.log(state);
+       if(this.count != state.count) {
+         this.count = state.count;
+         this.teasePlayer(state.round);
+       }
+     });
+     this.game.generateRound();
+     this.running = true;
+   }
+   else{
+     this.game.state.subscribe(state => {
+       console.log(state);
+       if(this.count != state.count) {
+         this.count = state.count;
+         this.teasePlayer(state.round);
+       }else if(this.count === START_COUNT){
+         this.teasePlayer(state.round);
+       }
+     });
+     this.game.restartGame();
+   }
+ }
 
   /**
  * @remarks
@@ -70,9 +86,9 @@ export class GameComponent implements OnInit {
  */
   async teasePlayer(round: string[]) {
     for (let i = 0; i < round.length; i++) {
-      await sleep(200);
+      await sleep(700);
       this.colors[round[i]] = true;
-      await sleep(500);
+      await sleep(400);
       this.colors[round[i]] = false;
     }
   }
